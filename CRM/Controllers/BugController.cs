@@ -11,13 +11,13 @@ namespace CRM.Controllers
         }
 
         //httpget
-        public IActionResult CreateBug()
+        public IActionResult AddBug()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateBug(Bug bug)
+        public IActionResult AddBug(Bug bug)
         {
             return View();
         }

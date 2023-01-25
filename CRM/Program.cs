@@ -1,7 +1,14 @@
+using CRM.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DatabaseContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseContext"));
+});
 // Services will be declared here
 var app = builder.Build();
 
@@ -25,6 +32,10 @@ app.UseAuthorization();
 // Default URL
 app.MapControllerRoute(
     name: "default",
+    pattern: "{controller=Account}/{action=Index}");
+
+app.MapControllerRoute(
+    name: "Dashboard",
     pattern: "{controller=Bug}/{action=Index}/{id?}");
 
 app.Run();
