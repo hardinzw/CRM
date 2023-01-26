@@ -1,5 +1,6 @@
 ﻿using CRM.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CRM.Controllers
 {
@@ -10,7 +11,7 @@ namespace CRM.Controllers
             return View();
         }
 
-        //httpget
+        [HttpGet]
         public IActionResult AddBug()
         {
             return View();
@@ -19,17 +20,104 @@ namespace CRM.Controllers
         [HttpPost]
         public IActionResult AddBug(Bug bug)
         {
-            return View();
+            try
+            {
+                using (var db = new DatabaseContext())
+                {
+                    db.Bug.Add(bug);
+                    db.SaveChanges();
+                    return RedirectToAction("DisplayBugs");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            //try
+            //{
+            //    _ctx.Add(bug);
+            //    _ctx.SaveChanges();
+            //    TempData["message"] = "Bug recorded.";
+            //    return RedirectToAction("Index");
+            //} 
+            //catch (Exception ex)
+            //{
+            //    TempData["message"] = ex.Message;
+            //    return View();
+            //}
         }
 
-        public IActionResult UpdateBug()
+        [HttpGet]
+        public IActionResult EditBug(int id)
         {
-            return View();
+            using (var db = new DatabaseContext())
+            {
+                var bug = db.Bug.Find(id);
+                return View(bug);
+            }
         }
 
-        public IActionResult DeleteBug()
+        [HttpPost]
+        public IActionResult EditBug(Bug bug)
         {
-            return View();
+            try
+            {
+                using (var db = new DatabaseContext())
+                {
+                    db.Bug.Update(bug);
+                    db.SaveChanges();
+                    return RedirectToAction("DisplayBugs");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TempData["message"] = "Could not update.";
+                return View();
+            }
+            //try
+            //{
+            //    _ctx.Add(bug);
+            //    _ctx.SaveChanges();
+            //    TempData["message"] = "Bug recorded.";
+            //    return RedirectToAction("Index");
+            //} 
+            //catch (Exception ex)
+            //{
+            //    TempData["message"] = ex.Message;
+            //    return View();
+            //}
+        }
+
+        public IActionResult DeleteBug(int id)
+        {
+            try
+            {
+                using (var db = new DatabaseContext())
+                {
+                    var bug = db.Bug.Find(id);
+                    if (bug != null)
+                    {
+                        db.Bug.Remove(bug);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("DisplayBugs");
+        }
+
+        public IActionResult DisplayBugs()
+        {
+            using (var db = new DatabaseContext())
+            {
+                var bugs = db.Bug.ToList();
+                return View(bugs);
+            }
         }
     }
 }

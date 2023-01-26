@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CRM.Models.Bug>
+@{
+    Layout = "_Layout";
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Actions</th>
+            <th scope="col">In Production?</th>
+            <th scope="col">Name</th>
+            <th scope="col">Severity</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created</th>
+            <th scope="col">Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bug in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-success" href="/Bug/EditBug?id=@bug.Id" role="button">Edit</a>
+                    <a class="btn btn-danger" href="/Bug/DeleteBug?id=@bug.Id" role="button">delete</a>
+                </td>
+                <td>@bug.IsActive</td>
+                <td>@bug.Name</td>
+                <td>@bug.Type</td>
+                <td>@bug.Description</td>
+                <td>@bug.DateCreated</td>
+                <td>@bug.DateUpdated</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
