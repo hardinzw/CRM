@@ -1,0 +1,20 @@
+﻿@model CRM.Models.Account
+@{
+    Layout = "_Login";
+}
+
+<form action="/Account/Login" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label for="usernameLabel">Username</label>        
+        @Html.TextBoxFor(m => m.Username)
+        <span class="text-danger" asp-validation-for="Username"></span>
+    </div>
+    <div class="form-group">
+        <label for="passwordLabel">Password</label>
+        @Html.PasswordFor(m => m.Password)
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+    <a href="/Account/Register" type="submit" class="btn btn-primary">Register</a>
+</form>

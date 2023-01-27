@@ -3,11 +3,12 @@
     Layout = "_Layout";
 }
 
+<a href="/Bug/AddBug" role="button"><span class="glyphicon glyphicon-plus alert-success"></span></a>
 <table class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Actions</th>
-            <th scope="col">In Production?</th>
+@*            <th scope="col">In Production?</th>*@
             <th scope="col">Name</th>
             <th scope="col">Severity</th>
             <th scope="col">Description</th>
@@ -20,10 +21,11 @@
         {
             <tr>
                 <td>
-                    <a class="btn btn-success" href="/Bug/EditBug?id=@bug.Id" role="button">Edit</a>
-                    <a class="btn btn-danger" href="/Bug/DeleteBug?id=@bug.Id" role="button">delete</a>
+                    <a href="/Bug/EditBug?id=@bug.Id" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="/Bug/DeleteBug?id=@bug.Id" role="button"><span class="glyphicon glyphicon-remove alert-danger"></span></a>
+                    
                 </td>
-                <td>@bug.IsActive</td>
+@*                <td>@bug.IsActive</td>*@
                 <td>@bug.Name</td>
                 <td>@bug.Type</td>
                 <td>@bug.Description</td>

@@ -1,15 +1,15 @@
 using CRM.Models;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging.Core;
+using SQLitePCL;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddDbContext<DatabaseContext>(options =>
-//{
-//    options.UseSqlite(builder.Configuration.GetConnectionString("DatabaseContext"));
-//});
-// Services will be declared here
+builder.Services.AddAuthentication()
+    .AddJwtBearer();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,10 +30,18 @@ app.UseAuthorization();
 
 // Index method of home controller
 // Default URL
+#region Account Routing
 app.MapControllerRoute(
-    name: "default",
+    name: "Index",
     pattern: "{controller=Account}/{action=Index}");
 
+//app.MapControllerRoute(
+//    name: "Register",
+//    pattern: "{controller=Account}/{action=Register}");
+#endregion
+
+
+#region Bug Routing
 app.MapControllerRoute(
     name: "DisplayBugs",
     pattern: "{controller=Bug}/{action=Index}");
@@ -49,5 +57,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "DeleteBug",
     pattern: "{controller=Bug}/{action=DeleteBug}/{id?}");
+#endregion
 
 app.Run();
