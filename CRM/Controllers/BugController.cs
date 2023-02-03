@@ -24,7 +24,7 @@ namespace CRM.Controllers
             {
                 using (var db = new DatabaseContext())
                 {
-                    db.Bug.Add(bug);
+                    db.Bugs.Add(bug);
                     db.SaveChanges();
                     return RedirectToAction("DisplayBugs");
                 }
@@ -53,7 +53,7 @@ namespace CRM.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                var bug = db.Bug.Find(id);
+                var bug = db.Bugs.Find(id);
                 return View(bug);
             }
         }
@@ -65,7 +65,7 @@ namespace CRM.Controllers
             {
                 using (var db = new DatabaseContext())
                 {
-                    db.Bug.Update(bug);
+                    db.Bugs.Update(bug);
                     db.SaveChanges();
                     return RedirectToAction("DisplayBugs");
                 }
@@ -96,10 +96,10 @@ namespace CRM.Controllers
             {
                 using (var db = new DatabaseContext())
                 {
-                    var bug = db.Bug.Find(id);
+                    var bug = db.Bugs.Find(id);
                     if (bug != null)
                     {
-                        db.Bug.Remove(bug);
+                        db.Bugs.Remove(bug);
                         db.SaveChanges();
                     }
                 }
@@ -115,7 +115,7 @@ namespace CRM.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                var bugs = db.Bug.ToList();
+                var bugs = db.Bugs.ToList();
                 return View(bugs);
             }
         }

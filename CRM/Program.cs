@@ -32,12 +32,12 @@ app.UseAuthorization();
 // Default URL
 #region Account Routing
 app.MapControllerRoute(
-    name: "Index",
-    pattern: "{controller=Account}/{action=Index}");
+    name: "Login",
+    pattern: "{controller=Account}/{action=Login}");
 
-//app.MapControllerRoute(
-//    name: "Register",
-//    pattern: "{controller=Account}/{action=Register}");
+app.MapControllerRoute(
+    name: "Register",
+    pattern: "{controller=Account}/{action=Register}");
 #endregion
 
 
